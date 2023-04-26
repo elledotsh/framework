@@ -1,0 +1,27 @@
+{
+    "name": "elle/framework",
+    "description": "micro-framework for laravel",
+    "autoload": {
+        "psr-4": {
+            "Elluminate\\": "src/Elluminate/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Bryce",
+            "email": "bryce@brycedev.com"
+        }
+    ],
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": false,
+    "require": {
+        "php": "^8.1",
+        "laravel/framework": "^10.8.0"
+    }
+}
