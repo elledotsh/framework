@@ -2,41 +2,39 @@
 
 namespace Elluminate\Models;
 
-use Elluminate\Models\Concerns\HasRouteActions;
+use Elluminate\Models\Concerns\HasRoutes;
 use Illuminate\Database\Eloquent\Concerns\HasRelationships;
-use Elluminate\Concerns\Is;
 
-class BaseModel {
+class BaseModel
+{
+    use HasRoutes;
+    use HasRelationships;
 
-	use HasRouteActions;
-	use HasRelationships;
-	use Is;
+    protected $guarded = [];
+    protected $hidden = [];
 
-	protected $guarded = [];
-	protected $hidden = [];
+    public function endpoints(): array
+    {
+        return [
+            $this->hasIndexRoute(),
+            $this->hasShowRoute(),
+            $this->hasStoreRoute(),
+            $this->hasUpdateRoute(),
+            $this->hasDeleteRoute(),
+        ];
+    }
 
-	public function endpoints() : array 
-	{
-    	return [
-			'index' => $this->hasIndexRoute(),
-			'create' => $this->hasCreateRoute(),
-			'show' => $this->hasShowRoute(),
-			'update' => $this->hasUpdateRoute(),
-			'delete' => $this->hasDeleteRoute(),
-		];
-  	}
+    public function relationships(): array
+    {
+        return [
 
-	public function relationships() : array 
-	{
-		return [
-			
-		];
-	}
+        ];
+    }
 
-	public function scopes() : array 
-	{
-		return [
+    public function scopes(): array
+    {
+        return [
 
-		];
-	}
+        ];
+    }
 }

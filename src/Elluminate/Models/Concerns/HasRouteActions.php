@@ -2,39 +2,33 @@
 
 namespace Elluminate\Models\Concerns;
 
-use Elluminate\Controllers\Actions\BaseAction;
-use Elluminate\Controllers\Actions\CreateAction;
-use Elluminate\Controllers\Actions\DeleteAction;
-use Elluminate\Controllers\Actions\IndexAction;
-use Elluminate\Controllers\Actions\ShowAction;
-use Elluminate\Controllers\Actions\UpdateAction;
+use Elluminate\Actions\Http\BaseAction;
+use Elluminate\Magic\Actions\Http;
 
-trait HasRouteActions {
-    abstract protected function is();
-
-    public function hasIndexRoute(BaseAction $routeAction = null) : BaseAction {
+trait HasRoutes {
+    public function hasIndexRoute(BaseAction $routeAction = null) : string {
         return $routeAction 
-            ? new $routeAction($this->is())
-            : new IndexAction($this->is());
+            ? get_class($routeAction)
+            : Http::index();
     }
-    public function hasCreateRoute(BaseAction $routeAction = null) : BaseAction {
+    public function hasStoreRoute(BaseAction $routeAction = null) :string {
         return $routeAction 
-            ? new $routeAction($this->is())
-            : new CreateAction($this->is());
+            ? new $routeAction()
+            : Http::store();
     }
-    public function hasDeleteRoute(BaseAction $routeAction = null) : BaseAction {
+    public function hasDeleteRoute(BaseAction $routeAction = null) :string {
         return $routeAction 
-            ? new $routeAction($this->is())
-            : new DeleteAction($this->is());
+            ? new $routeAction()
+            : Http::delete();
     }
-    public function hasShowRoute(BaseAction $routeAction = null) : BaseAction {
+    public function hasShowRoute(BaseAction $routeAction = null) :string {
         return $routeAction 
-            ? new $routeAction($this->is())
-            : new ShowAction($this->is());
+            ? new $routeAction()
+            : Http::show();
     }
-    public function hasUpdateRoute(BaseAction $routeAction = null) : BaseAction {
+    public function hasUpdateRoute(BaseAction $routeAction = null) :string {
         return $routeAction 
-            ? new $routeAction($this->is())
-            : new UpdateAction($this->is());
+            ? new $routeAction()
+            : Http::update();
     }
 }
